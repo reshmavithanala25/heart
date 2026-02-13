@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine Question</title>
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff4e8a, #ff9ecb);
+}
+
+/* floating hearts */
+.heart {
+    position: fixed;
+    bottom: -20px;
+    color: #fff;
+    font-size: 20px;
+    animation: floatUp linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0) scale(1); opacity: 0.9; }
+    to { transform: translateY(-110vh) scale(1.8); opacity: 0; }
+}
+
+.container {
+    background: white;
+    padding: 35px;
+    border-radius: 25px;
+    width: 400px;
+    margin: 80px auto;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    color: #e91e63;
+    text-shadow: 0 0 10px #ffb3d1;
+}
+
+.main-img {
+    width: 200px;
+    margin: 15px 0;
+    animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+button {
+    padding: 14px 26px;
+    font-size: 18px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    margin: 12px;
+    transition: 0.25s;
+}
+
+.yesBtn {
+    background: linear-gradient(45deg,#00c853,#69f0ae);
+    color: white;
+    box-shadow: 0 0 15px #69f0ae;
+}
+
+.noBtn {
+    background: linear-gradient(45deg,#d50000,#ff5252);
+    color: white;
+    position: absolute;
+}
+
+button:hover {
+    transform: scale(1.15);
+}
+
+#message {
+    color: #e91e63;
+    font-weight: bold;
+    height: 30px;
+    font-size: 18px;
+}
+
+/* popup */
+.popup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 5;
+}
+
+.popup-content {
+    background: white;
+    padding: 35px;
+    border-radius: 25px;
+    width: 320px;
+    margin: 15% auto;
+    text-align: center;
+    animation: pop 0.4s ease;
+}
+
+@keyframes pop {
+    from { transform: scale(0.4) rotate(-8deg); opacity: 0; }
+    to { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+.quote {
+    color: #e91e63;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Will You Be My Valentine? 💖</h1>
+
+    <!-- ✅ Use local file name instead of C:\ path -->
+   <img src="https://www.ecraftindia.com/cdn/shop/products/VD1071_main_hd.jpg?v=1704969608"
+     height="200" width="200">
+
+
+    <div>
+        <button class="yesBtn" onclick="sayYes()">Yes 💘</button>
+        <button class="noBtn" id="noBtn">No 💔</button>
+    </div>
+
+    <div id="message"></div>
+</div>
+
+<!-- popup -->
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <h2> My Heart Says You 💞</h2>
+
+        <!-- ✅ Fixed image tag -->
+        <img src="c:\Users\vrash\OneDrive\Pictures\swap.jpeg"
+             height="200" width="200"
+             style="border-radius:15px; margin:10px 0;">
+
+        <div class="quote" id="quoteText"></div>
+
+        <br>
+        <button onclick="closePopup()">love 💌</button>
+    </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+
+function moveNoButton() {
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 80);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+    document.getElementById("message").innerText = "Please click YES 😄";
+}
+
+noBtn.addEventListener("mouseover", moveNoButton);
+noBtn.addEventListener("click", moveNoButton);
+
+function sayYes() {
+    document.getElementById("popup").style.display = "block";
+
+    const quotes = [
+        "You are my today and all of my tomorrows 💖",
+        "Every love story is beautiful, but ours is my favorite 💞",
+        "My heart is perfect because you are inside 💘",
+        "With you, every moment is Valentine’s Day 💗",
+        "I choose you — always and forever 💍"
+    ];
+
+    const q = quotes[Math.floor(Math.random() * quotes.length)];
+    document.getElementById("quoteText").innerText = q;
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💗";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (3 + Math.random() * 4) + "s";
+    heart.style.fontSize = (16 + Math.random() * 24) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 7000);
+}
+
+setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
